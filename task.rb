@@ -24,3 +24,17 @@ class Task
       end
     end
 end
+
+class TodoList
+  attr_accessor :title, :list
+
+  def initialize(title)
+    @title = title
+    @list = []
+  end
+
+  def add_task(task)
+    list << task
+  end
+
+end
