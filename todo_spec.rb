@@ -53,8 +53,6 @@ describe Task do
 	end
 end
 
-class TodoList 
-end
 
 describe TodoList do
 	let(:todo) { todo = TodoList.new("Home Stuff") }
