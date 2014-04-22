@@ -1,15 +1,5 @@
 require "rspec"
-
-class Task
-    attr_accessor :title, :description, :status, :created_at
-
-    def initialize(title, description, status="incomplete")
-        @title = title
-        @description = description
-        @status = status
-        @created_at = Time.now
-    end
-end
+require_relative 'task'
 
 describe Task do
 	let(:task) { task = Task.new("Walk the dog", "I'm walking the dog") }
