@@ -4,7 +4,7 @@ require_relative 'task'
 describe Task do
 	let(:task) { task = Task.new("Walk the dog", "I'm walking the dog") }
 
-	context "when initializing" do
+	context "#initializing" do
 		it "should have a title" do
 			expect(task.title).to eq "Walk the dog"
 		end
@@ -22,7 +22,7 @@ describe Task do
 		end
 	end
 
-	context "method to mark as complete" do
+	context "#mark_as_complete" do
 		it "should set status to complete" do
 			task.mark_as_complete!
 
@@ -30,7 +30,7 @@ describe Task do
 		end
 	end
 
-	context "method to mark as incomplete" do
+	context "#mark_as_incomplete" do
 		it "should set status to incomplete" do
 			task.mark_as_incomplete!
 
@@ -38,7 +38,7 @@ describe Task do
 		end
 	end
 
-	context "method to check if complete" do
+	context "#complete?" do
 		it "should show the status is complete" do
 			task.mark_as_complete!
 
@@ -57,7 +57,7 @@ end
 describe TodoList do
 	let(:todo) { todo = TodoList.new("Home Stuff") }
 
-	context "on initialize" do
+	context "#initialize" do
 		it "should have a title attribute" do
 			expect(todo.title).to eq "Home Stuff"
 		end
@@ -68,7 +68,7 @@ describe TodoList do
 
 	end
 
-	context "add task" do
+	context "#add_task" do
 		it "should add task object to todo list" do
 			task = Task.new("Walk the dog", "I'm going to walk the dog.")
 			todo.add_task(task)
@@ -77,7 +77,7 @@ describe TodoList do
 		end
 	end
 
-	before(:each) do
+	context "#complete_all" do
 		getDog = Task.new("Buy a dog", "I'm going to buy a dog")
 		trainDog = Task.new("Train the dog", "I'm going to train the dog")
 		playDog = Task.new("Pretend to be a dog", "I'm going to be the dog")
@@ -87,9 +87,7 @@ describe TodoList do
 		doggieList.add_task(getDog)
 		doggieList.add_task(trainDog)
 		doggieList.add_task(playDog)
-	end
 
-	context "complete all" do
 		it "should mark all tasks complete" do
 			doggieList.complete_all!
 			doggieList.list.each do |task|
@@ -98,7 +96,17 @@ describe TodoList do
 		end
 	end
 
-	context "complete?" do
+	context "#complete?" do
+		getDog = Task.new("Buy a dog", "I'm going to buy a dog")
+		trainDog = Task.new("Train the dog", "I'm going to train the dog")
+		playDog = Task.new("Pretend to be a dog", "I'm going to be the dog")
+		
+		doggieList = TodoList.new("Doggie List")
+		
+		doggieList.add_task(getDog)
+		doggieList.add_task(trainDog)
+		doggieList.add_task(playDog)
+
 		it "should return false if not all tasks are complete" do
 			expect(doggieList.complete?).to eq false
 		end
@@ -109,7 +117,7 @@ describe TodoList do
 		end
 	end
 
-	before(:each) do
+	context "completed tasks" do
 		getDog = Task.new("Buy a dog", "I'm going to buy a dog")
 		trainDog = Task.new("Train the dog", "I'm going to train the dog")
 		walkDog = Task.new("Walk the dog", "I'm going to walk the dog")
@@ -123,15 +131,27 @@ describe TodoList do
 		doggieList.add_task(walkDog)
 		doggieList.add_task(playDog)
 		doggieList.add_task(feedDog)
-	end
 
-	context "completed tasks" do
 		it "should return array of completed tasks" do 
 			expect(doggieList.completed_tasks).should have(2).items
 		end
 	end
 
 	context "incomplete tasks" do
+		getDog = Task.new("Buy a dog", "I'm going to buy a dog")
+		trainDog = Task.new("Train the dog", "I'm going to train the dog")
+		walkDog = Task.new("Walk the dog", "I'm going to walk the dog")
+		playDog = Task.new("Pretend to be a dog", "I'm going to be the dog", "complete")
+		feedDog = Task.new("Feed the dogs", "Since we're both dogs, we both get fed", "complete")
+		
+		doggieList = TodoList.new("Doggie List")
+		
+		doggieList.add_task(getDog)
+		doggieList.add_task(trainDog)
+		doggieList.add_task(walkDog)
+		doggieList.add_task(playDog)
+		doggieList.add_task(feedDog)
+
 		it "should return array of incomplete tasks" do 
 			expect(doggieList.incomplete_tasks).should have(3).items
 		end
