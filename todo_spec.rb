@@ -87,9 +87,12 @@ describe TodoList do
 		doggie_list.add_task(get_dog)
 		doggie_list.add_task(train_dog)
 		doggie_list.add_task(play_dog)
+
+		doggie_list
 	end
 
 	context "#complete_all" do
+
 		it "should mark all tasks complete" do
 			doggie_list.complete_all!
 			doggie_list.list.each do |task|
@@ -123,6 +126,8 @@ describe TodoList do
 		doggie_list.add_task(walkDog)
 		doggie_list.add_task(play_dog)
 		doggie_list.add_task(feedDog)
+
+		doggie_list
 	end
 
 	context "completed tasks" do
