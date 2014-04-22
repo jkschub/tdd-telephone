@@ -77,83 +77,63 @@ describe TodoList do
 		end
 	end
 
-	context "#complete_all" do
-		getDog = Task.new("Buy a dog", "I'm going to buy a dog")
-		trainDog = Task.new("Train the dog", "I'm going to train the dog")
-		playDog = Task.new("Pretend to be a dog", "I'm going to be the dog")
+	let(:doggie_list) do
+		get_dog = Task.new("Buy a dog", "I'm going to buy a dog")
+		train_dog = Task.new("Train the dog", "I'm going to train the dog")
+		play_dog = Task.new("Pretend to be a dog", "I'm going to be the dog")
 		
-		doggieList = TodoList.new("Doggie List")
+		doggie_list = TodoList.new("Doggie List")
 		
-		doggieList.add_task(getDog)
-		doggieList.add_task(trainDog)
-		doggieList.add_task(playDog)
+		doggie_list.add_task(get_dog)
+		doggie_list.add_task(train_dog)
+		doggie_list.add_task(play_dog)
+	end
 
+	context "#complete_all" do
 		it "should mark all tasks complete" do
-			doggieList.complete_all!
-			doggieList.list.each do |task|
+			doggie_list.complete_all!
+			doggie_list.list.each do |task|
 				expect(task.status).to eq "complete"
 			end
 		end
 	end
 
 	context "#complete?" do
-		getDog = Task.new("Buy a dog", "I'm going to buy a dog")
-		trainDog = Task.new("Train the dog", "I'm going to train the dog")
-		playDog = Task.new("Pretend to be a dog", "I'm going to be the dog")
-		
-		doggieList = TodoList.new("Doggie List")
-		
-		doggieList.add_task(getDog)
-		doggieList.add_task(trainDog)
-		doggieList.add_task(playDog)
-
 		it "should return false if not all tasks are complete" do
-			expect(doggieList.complete?).to eq false
+			expect(doggie_list.complete?).to eq false
 		end
 
 		it "should return true if all tasks are complete" do
-			doggieList.complete_all!
-			expect(doggieList.complete?).to eq true
+			doggie_list.complete_all!
+			expect(doggie_list.complete?).to eq true
 		end
 	end
 
-	context "completed tasks" do
-		getDog = Task.new("Buy a dog", "I'm going to buy a dog")
-		trainDog = Task.new("Train the dog", "I'm going to train the dog")
+	let(:doggie_list) do 
+		get_dog = Task.new("Buy a dog", "I'm going to buy a dog")
+		train_dog = Task.new("Train the dog", "I'm going to train the dog")
 		walkDog = Task.new("Walk the dog", "I'm going to walk the dog")
-		playDog = Task.new("Pretend to be a dog", "I'm going to be the dog", "complete")
+		play_dog = Task.new("Pretend to be a dog", "I'm going to be the dog", "complete")
 		feedDog = Task.new("Feed the dogs", "Since we're both dogs, we both get fed", "complete")
 		
-		doggieList = TodoList.new("Doggie List")
+		doggie_list = TodoList.new("Doggie List")
 		
-		doggieList.add_task(getDog)
-		doggieList.add_task(trainDog)
-		doggieList.add_task(walkDog)
-		doggieList.add_task(playDog)
-		doggieList.add_task(feedDog)
+		doggie_list.add_task(get_dog)
+		doggie_list.add_task(train_dog)
+		doggie_list.add_task(walkDog)
+		doggie_list.add_task(play_dog)
+		doggie_list.add_task(feedDog)
+	end
 
+	context "completed tasks" do
 		it "should return array of completed tasks" do 
-			expect(doggieList.completed_tasks).should have(2).items
+			expect(doggie_list.completed_tasks).should have(2).items
 		end
 	end
 
 	context "incomplete tasks" do
-		getDog = Task.new("Buy a dog", "I'm going to buy a dog")
-		trainDog = Task.new("Train the dog", "I'm going to train the dog")
-		walkDog = Task.new("Walk the dog", "I'm going to walk the dog")
-		playDog = Task.new("Pretend to be a dog", "I'm going to be the dog", "complete")
-		feedDog = Task.new("Feed the dogs", "Since we're both dogs, we both get fed", "complete")
-		
-		doggieList = TodoList.new("Doggie List")
-		
-		doggieList.add_task(getDog)
-		doggieList.add_task(trainDog)
-		doggieList.add_task(walkDog)
-		doggieList.add_task(playDog)
-		doggieList.add_task(feedDog)
-
 		it "should return array of incomplete tasks" do 
-			expect(doggieList.incomplete_tasks).should have(3).items
+			expect(doggie_list.incomplete_tasks).should have(3).items
 		end
 	end
 
