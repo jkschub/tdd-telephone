@@ -108,4 +108,33 @@ describe TodoList do
 			expect(doggieList.complete?).to eq true
 		end
 	end
+
+	before(:each) do
+		getDog = Task.new("Buy a dog", "I'm going to buy a dog")
+		trainDog = Task.new("Train the dog", "I'm going to train the dog")
+		walkDog = Task.new("Walk the dog", "I'm going to walk the dog")
+		playDog = Task.new("Pretend to be a dog", "I'm going to be the dog", "complete")
+		feedDog = Task.new("Feed the dogs", "Since we're both dogs, we both get fed", "complete")
+		
+		doggieList = TodoList.new("Doggie List")
+		
+		doggieList.add_task(getDog)
+		doggieList.add_task(trainDog)
+		doggieList.add_task(walkDog)
+		doggieList.add_task(playDog)
+		doggieList.add_task(feedDog)
+	end
+
+	context "completed tasks" do
+		it "should return array of completed tasks" do 
+			expect(doggieList.completed_tasks).should have(2).items
+		end
+	end
+
+	context "incomplete tasks" do
+		it "should return array of incomplete tasks" do 
+			expect(doggieList.incomplete_tasks).should have(3).items
+		end
+	end
+
 end
