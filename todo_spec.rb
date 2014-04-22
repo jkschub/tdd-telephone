@@ -1,7 +1,10 @@
 require "rspec"
 
+class Task
+end
+
 describe Task do
-	let(:task) { task = Task.new("Walk the dog", "I'm walking the dog", "incomplete", Time.now) }
+	let(:task) { task = Task.new("Walk the dog", "I'm walking the dog") }
 
 	context "when initializing" do
 		it "should have a title" do
