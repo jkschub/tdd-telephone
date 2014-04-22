@@ -1,6 +1,14 @@
 require "rspec"
 
 class Task
+    attr_accessor :title, :description, :status, :created_at
+
+    def initialize(title, description, status="incomplete")
+        @title = title
+        @description = description
+        @status = status
+        @created_at = Time.now
+    end
 end
 
 describe Task do
