@@ -76,4 +76,36 @@ describe TodoList do
 			expect(todo.list.first).should be_an_instance_of Task
 		end
 	end
+
+	before(:each) do
+		getDog = Task.new("Buy a dog", "I'm going to buy a dog")
+		trainDog = Task.new("Train the dog", "I'm going to train the dog")
+		playDog = Task.new("Pretend to be a dog", "I'm going to be the dog")
+		
+		doggieList = TodoList.new("Doggie List")
+		
+		doggieList.add_task(getDog)
+		doggieList.add_task(trainDog)
+		doggieList.add_task(playDog)
+	end
+
+	context "complete all" do
+		it "should mark all tasks complete" do
+			doggieList.complete_all!
+			doggieList.list.each do |task|
+				expect(task.status).to eq "complete"
+			end
+		end
+	end
+
+	context "complete?" do
+		it "should return false if not all tasks are complete" do
+			expect(doggieList.complete?).to eq false
+		end
+
+		it "should return true if all tasks are complete" do
+			doggieList.complete_all!
+			expect(doggieList.complete?).to eq true
+		end
+	end
 end
